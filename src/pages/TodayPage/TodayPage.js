@@ -14,14 +14,21 @@ const TodayPage = () => {
     const [myTodayHabits, setMyTodayHabits] = useState(undefined);
     const date = new Date();
     const dia = date.getDay();
+    const [cont, setCont] = useState(0);
+    const [donePercent, setDonePercent] = useState(0);
 
     useEffect(() => {
-        setMyTodayHabits(undefined);
         axios.get(`${APIURL}/habits/today`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then((res) => setMyTodayHabits(res.data))
-            .catch((err) => console.log(err.response.data.message))
+            .then((res) => {
+                setMyTodayHabits(res.data);
+                const newCont = res.data.filter(e => e.done === true).length;
+                setCont(newCont);
+                const percent = Math.round(newCont / res.data.length * 100);
+                setDonePercent(percent);
+            })
+            .catch((err) => console.log(err.response.data.message));
     }, []);
 
     if (myTodayHabits === undefined) {
@@ -33,15 +40,25 @@ const TodayPage = () => {
             <Header />
             <Footer />
             <Title>{WEEKDAY[dia]}, {date.toLocaleDateString()}</Title>
+            {cont === 0 ?
+                <Text textColor={false}>{NOHABITSTODAY}</Text>
+                :
+                <Text textColor={true}>{donePercent}% dos hábitos concluídos</Text>
+            }
             {myTodayHabits.length === 0 ?
-                <Text>{NOHABITSTODAY}</Text>
+                <></>
                 :
                 myTodayHabits.map((e) =>
                     <HabitCard
                         key={e.id}
                         habit={e}
+                        cont={cont}
+                        setCont={setCont}
+                        myTodayHabits={myTodayHabits}
+                        setDonePercent={setDonePercent}
                     />
-                )}
+                )
+            }
         </Today>
     );
 }

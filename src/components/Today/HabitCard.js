@@ -5,10 +5,9 @@ import { APIURL } from "../../constants/url";
 import { useContext, useState } from "react";
 import Context from "../Context/Context";
 
-const HabitCard = ({ habit }) => {
+const HabitCard = ({ habit, cont, setCont, myTodayHabits, setDonePercent }) => {
     const { token } = useContext(Context);
     const { name, id, highestSequence, currentSequence, done } = habit;
-
     const statusAPI = (done) ? "uncheck" : "check";
     const [statusRequest, setStatusRequest] = useState(statusAPI);
     const [checked, setChecked] = useState(done);
@@ -26,6 +25,17 @@ const HabitCard = ({ habit }) => {
                 const newStatus = (!status) ? "uncheck" : "check";
                 setStatusRequest(newStatus);
                 setChecked(!checked);
+                if (!status) {
+                    const newCont = cont + 1
+                    setCont(newCont)
+                    const percent = Math.round(newCont / myTodayHabits.length * 100);
+                    setDonePercent(percent);
+                } else {
+                    const newCont = cont - 1
+                    setCont(newCont)
+                    const percent = Math.round(newCont / myTodayHabits.length * 100);
+                    setDonePercent(percent);
+                }
                 (!status) ?
                     setLocalCurrentSequence(localCurrentSequence + 1)
                     :

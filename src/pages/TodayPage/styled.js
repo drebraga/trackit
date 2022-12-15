@@ -28,6 +28,5 @@ export const Text = styled.p`
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    color: #BABABA;
-    margin-bottom: 20px;
+    color: ${props => props.textColor ? "#8FC549" : "#BABABA"};
 `;
