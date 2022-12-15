@@ -50,6 +50,9 @@ export const InputsLogin = styled.form`
         border-radius: 5px;
         text-align: center;
         color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 export const Cadastro = styled.p`
