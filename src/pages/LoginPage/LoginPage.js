@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../../constants/url";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 
-const LoginPage = () => {
+const LoginPage = ({setResLogin}) => {
     const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginData, setLoginData] = useState({
@@ -23,7 +23,7 @@ const LoginPage = () => {
         axios.post(`${APIURL}/auth/login`, loginData)
             .then((res) => {
                 setLoginStatus(false);
-                console.log(res.data);
+                setResLogin(res.data);
                 navigate("/hoje");
             })
             .catch((err) => {
