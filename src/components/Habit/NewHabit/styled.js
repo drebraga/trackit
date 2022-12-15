@@ -35,7 +35,7 @@ export const DivButton = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
-`
+`;
 export const InputFinal = styled.input`
     box-sizing: border-box;
     margin: 0 5px;

@@ -10,14 +10,16 @@ const Habits = ({ habit, myHabits, setMyHabits }) => {
     const { token } = useContext(Context);
 
     function sendRequestRemove(id) {
-        axios.delete(`${APIURL}/habits/${id}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(() => {
-                const newHabits = myHabits.filter(e => e.id !== id);
-                setMyHabits(newHabits);
+        if (window.confirm("Deseja realmente apagar esse hábito?")) {
+            axios.delete(`${APIURL}/habits/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
-            .catch((err) => console.log(err.response.data.message))
+                .then(() => {
+                    const newHabits = myHabits.filter(e => e.id !== id);
+                    setMyHabits(newHabits);
+                })
+                .catch((err) => console.log(err.response.data.message));
+        }
     }
 
     return (

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../../constants/url";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 
-const LoginPage = ({setResLogin}) => {
+const LoginPage = ({ setResLogin }) => {
     const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginData, setLoginData] = useState({
@@ -76,4 +76,3 @@ const LoginPage = ({setResLogin}) => {
 }
 
 export default LoginPage;
-

@@ -15,14 +15,14 @@ export const Foot = styled.footer`
     a {
         text-decoration: none;
     }
-`
+`;
 export const Text = styled.p`
     font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #52B6FF;
-`
+`;
 export const Today = styled.input`
     margin-bottom: 35px;
     width: 90px;
@@ -34,4 +34,4 @@ export const Today = styled.input`
     font-size: 18px;
     line-height: 22px;
     color: #FFFFFF;
-`
+`;

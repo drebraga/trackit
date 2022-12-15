@@ -7,6 +7,9 @@ export const Login = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    a {
+        margin-top: 50px;
+    }
 `;
 export const Title = styled.h1`
     margin-bottom: 30px;
@@ -56,11 +59,10 @@ export const InputsLogin = styled.form`
     }
 `;
 export const Cadastro = styled.p`
-    margin-top: 50px;
     font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 14px;
     text-align: center;
     text-decoration-line: underline;
     color: #52B6FF;

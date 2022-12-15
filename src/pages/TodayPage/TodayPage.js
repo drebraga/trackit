@@ -11,19 +11,20 @@ import { Text, Title, Today } from "./styled";
 
 const TodayPage = () => {
     const { token } = useContext(Context);
-    const [myHabits, setMyHabits] = useState(undefined);
+    const [myTodayHabits, setMyTodayHabits] = useState(undefined);
     const date = new Date();
     const dia = date.getDay();
 
     useEffect(() => {
+        setMyTodayHabits(undefined);
         axios.get(`${APIURL}/habits/today`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then((res) => setMyHabits(res.data))
+            .then((res) => setMyTodayHabits(res.data))
             .catch((err) => console.log(err.response.data.message))
-    }, [])
+    }, []);
 
-    if (myHabits === undefined) {
+    if (myTodayHabits === undefined) {
         return <PageLoad />
     }
 
@@ -32,7 +33,15 @@ const TodayPage = () => {
             <Header />
             <Footer />
             <Title>{WEEKDAY[dia]}, {date.toLocaleDateString()}</Title>
-            {myHabits.length === 0 ? <Text>{NOHABITSTODAY}</Text> : myHabits.map(() => <HabitCard />)}
+            {myTodayHabits.length === 0 ?
+                <Text>{NOHABITSTODAY}</Text>
+                :
+                myTodayHabits.map((e) =>
+                    <HabitCard
+                        key={e.id}
+                        habit={e}
+                    />
+                )}
         </Today>
     );
 }

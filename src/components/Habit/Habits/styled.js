@@ -24,4 +24,4 @@ export const DivSpaceBet = styled.div`
     font-size: 20px;
     line-height: 25px;
     color: #666666;
-`
+`;

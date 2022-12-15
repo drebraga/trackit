@@ -20,8 +20,8 @@ const HabitPage = () => {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => setMyHabits(res.data))
-            .catch((err) => console.log(err.response.data.message))
-    }, [])
+            .catch((err) => console.log(err.response.data.message));
+    }, []);
 
     if (myHabits === undefined) {
         return <PageLoad />

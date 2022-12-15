@@ -19,12 +19,14 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
             });
         } else {
             const newdays = request.days.includes(e.target.name) ?
-                request.days.filter(d => d !== e.target.name) : [...request.days, Number(e.target.name)];
+                request.days.filter(d => d !== e.target.name)
+                :
+                [...request.days, Number(e.target.name)];
             setRequest({ ...request, days: newdays });
         }
     }
 
-    function sendRequest(e) {
+    function sendRequestAdd(e) {
         e.preventDefault();
         if (request.days.length > 0) {
             setNewHabitTab(false);
@@ -39,7 +41,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
     }
 
     return (
-        <Form onSubmit={sendRequest}>
+        <Form onSubmit={sendRequestAdd}>
             <InputText
                 type="text"
                 placeholder="nome do hábito"
