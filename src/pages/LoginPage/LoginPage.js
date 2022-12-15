@@ -6,12 +6,12 @@ import { APIURL } from "../../constants/url";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginData, setLoginData] = useState({
         password: "",
         email: ""
     });
-    const navigate = useNavigate();
 
     function handleInput(e) {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -55,17 +55,17 @@ const LoginPage = () => {
                     required
                 />
                 <button disabled={loginStatus} type="submit">
-                    {(!loginStatus) ? "Entrar" : 
-                    <ThreeDots
-                        height="45"
-                        width="45"
-                        radius="9"
-                        color="#FFFFFF"
-                        ariaLabel="three-dots-loading"
-                        wrapperStyle={{}}
-                        wrapperClassName=""
-                        visible={true}
-                    />}
+                    {(!loginStatus) ? "Entrar" :
+                        <ThreeDots
+                            height="45"
+                            width="45"
+                            radius="9"
+                            color="#FFFFFF"
+                            ariaLabel="three-dots-loading"
+                            wrapperStyle={{}}
+                            wrapperClassName=""
+                            visible={true}
+                        />}
                 </button>
             </InputsLogin>
             <Link to="/cadastro">

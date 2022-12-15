@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 import { APIURL } from "../../constants/url";
+import { ThreeDots } from "react-loader-spinner";
 
 const SignInPage = () => {
+    const navigate = useNavigate();
+    const [loginStatus, setLoginStatus] = useState(false);
     const [signData, setSignData] = useState({
         email: "",
         name: "",
@@ -19,9 +22,17 @@ const SignInPage = () => {
 
     function sendRequest(e) {
         e.preventDefault();
+        setLoginStatus(true);
         axios.post(`${APIURL}/auth/sign-up`, signData)
-            .then((res) => console.log(res.data))
-            .catch((err) => console.log(err.response.data));
+            .then((res) => {
+                setLoginStatus(false);
+                console.log(res.data);
+                navigate("/");
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+                setLoginStatus(false);
+            });
     }
 
     return (
@@ -34,6 +45,7 @@ const SignInPage = () => {
                     name="email"
                     value={signData.email}
                     onChange={handleInput}
+                    disabled={loginStatus}
                     required
                 />
                 <input
@@ -42,6 +54,7 @@ const SignInPage = () => {
                     name="password"
                     value={signData.password}
                     onChange={handleInput}
+                    disabled={loginStatus}
                     required
                 />
                 <input
@@ -50,6 +63,7 @@ const SignInPage = () => {
                     name="name"
                     value={signData.name}
                     onChange={handleInput}
+                    disabled={loginStatus}
                     required
                 />
                 <input
@@ -58,9 +72,22 @@ const SignInPage = () => {
                     name="image"
                     value={signData.image}
                     onChange={handleInput}
+                    disabled={loginStatus}
                     required
                 />
-                <button type="submit">Cadastrar</button>
+                <button disabled={loginStatus} type="submit">
+                    {(!loginStatus) ? "Cadastrar" :
+                        <ThreeDots
+                            height="45"
+                            width="45"
+                            radius="9"
+                            color="#FFFFFF"
+                            ariaLabel="three-dots-loading"
+                            wrapperStyle={{}}
+                            wrapperClassName=""
+                            visible={true}
+                        />}
+                </button>
             </InputsLogin>
             <Link to="/">
                 <Cadastro>Já tem uma conta? Faça login!</Cadastro>
