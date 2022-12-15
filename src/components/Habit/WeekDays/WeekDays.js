@@ -1,10 +1,20 @@
 import { InputDays } from "./styled";
+import { WEEKDAYSLETTERS } from "../../../constants/Textos";
 
-const WeekDays = () => {
-    const WEEKDAYS = ["D", "S", "T", "Q", "Q", "S", "S"];
+const WeekDays = ({ dis, handleInput, days }) => {
     return (
         <div>
-            {WEEKDAYS.map((e, i) => <InputDays key={i} type="button" value={e} />)}
+            {WEEKDAYSLETTERS.map((e, i) =>
+                <InputDays
+                    onClick={handleInput}
+                    name={i}
+                    key={i}
+                    type="button"
+                    value={e}
+                    disabled={dis}
+                    includes={days.includes(i)}
+                />
+            )}
         </div>
     );
 }

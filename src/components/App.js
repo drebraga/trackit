@@ -11,7 +11,6 @@ import Context from "./Context/Context";
 
 function App() {
   const [resLogin, setResLogin] = useState({});
-  console.log(resLogin, "resposta do servidor");
 
   return (
     <BrowserRouter>
