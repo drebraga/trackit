@@ -4,6 +4,7 @@ import { APIURL } from "../../../constants/url";
 import Context from "../../Context/Context";
 import WeekDays from "../WeekDays/WeekDays";
 import { DivButton, Form, InputFinal, InputText } from "./styled";
+import { ThreeDots } from "react-loader-spinner";
 
 const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
     const { token } = useContext(Context);
@@ -11,6 +12,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
         name: "",
         days: []
     });
+    const [sendStatus, setSendStatus] = useState(false);
 
     function handleInput(e) {
         if (e.target.name === "name") {
@@ -29,11 +31,15 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
     function sendRequestAdd(e) {
         e.preventDefault();
         if (request.days.length > 0) {
-            setNewHabitTab(false);
+            setSendStatus(true);
             axios.post(`${APIURL}/habits`, request, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-                .then((res) => setMyHabits([...myHabits, res.data]))
+                .then((res) => {
+                    setMyHabits([...myHabits, res.data])
+                    setSendStatus(false);
+                    setNewHabitTab(false);
+                })
                 .catch((err) => console.log(err.response.data.message));
         } else {
             alert("Adicione pelo menos um dia ao hábito");
@@ -48,16 +54,39 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
                 name="name"
                 value={request.name}
                 onChange={handleInput}
+                disabled={sendStatus}
                 required
             />
             <WeekDays
-                dis={false}
+                dis={sendStatus}
                 handleInput={handleInput}
                 days={request.days}
             />
             <DivButton>
-                <InputFinal onClick={() => setNewHabitTab(false)} type="button" value="Cancelar" />
-                <InputFinal type="submit" value="Salvar" />
+                <InputFinal
+                    onClick={() => setNewHabitTab(false)}
+                    disabled={sendStatus}
+                    value="Cancelar"
+                >
+                    Cancelar
+                </ InputFinal>
+                <InputFinal
+                    type="submit"
+                    value="Salvar"
+                    disabled={sendStatus}
+                >
+                    {(!sendStatus) ? "Salvar" :
+                        <ThreeDots
+                            height="45"
+                            width="45"
+                            radius="9"
+                            color="#FFFFFF"
+                            ariaLabel="three-dots-loading"
+                            wrapperStyle={{}}
+                            wrapperClassName=""
+                            visible={true}
+                        />}
+                </ InputFinal>
             </DivButton>
         </Form>
     );

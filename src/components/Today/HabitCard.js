@@ -5,8 +5,8 @@ import { APIURL } from "../../constants/url";
 import { useContext, useState } from "react";
 import Context from "../Context/Context";
 
-const HabitCard = ({ habit, cont, setCont, myTodayHabits, setDonePercent }) => {
-    const { token } = useContext(Context);
+const HabitCard = ({ habit, cont, setCont, myTodayHabits, setResLogin }) => {
+    const user = useContext(Context);
     const { name, id, highestSequence, currentSequence, done } = habit;
     const statusAPI = (done) ? "uncheck" : "check";
     const [statusRequest, setStatusRequest] = useState(statusAPI);
@@ -19,7 +19,7 @@ const HabitCard = ({ habit, cont, setCont, myTodayHabits, setDonePercent }) => {
 
     function checkHabit(i, status) {
         axios.post(`${APIURL}/habits/${i}/${statusRequest}`, {}, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${user.token}` }
         })
             .then(() => {
                 const newStatus = (!status) ? "uncheck" : "check";
@@ -29,12 +29,12 @@ const HabitCard = ({ habit, cont, setCont, myTodayHabits, setDonePercent }) => {
                     const newCont = cont + 1
                     setCont(newCont)
                     const percent = Math.round(newCont / myTodayHabits.length * 100);
-                    setDonePercent(percent);
+                    setResLogin({...user, percent});
                 } else {
                     const newCont = cont - 1
                     setCont(newCont)
                     const percent = Math.round(newCont / myTodayHabits.length * 100);
-                    setDonePercent(percent);
+                    setResLogin({...user, percent});
                 }
                 (!status) ?
                     setLocalCurrentSequence(localCurrentSequence + 1)

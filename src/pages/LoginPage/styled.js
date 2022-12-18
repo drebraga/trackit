@@ -26,6 +26,12 @@ export const InputsLogin = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+    *{
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 21px;
+    line-height: 26px;
+    font-weight: 400;
+    }
     input{
         box-sizing: border-box;
         margin: 5px 0;
@@ -34,11 +40,8 @@ export const InputsLogin = styled.form`
         padding: 10px;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
+        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
         &::placeholder{
-            font-family: 'Lexend Deca', sans-serif;
-            font-size: 21px;
-            line-height: 26px;
-            font-weight: 400;
             color: #DBDBDB;
         }
     }
@@ -46,10 +49,6 @@ export const InputsLogin = styled.form`
         width: 80%;
         height: 45px;
         background: #52B6FF;
-        font-family: 'Lexend Deca', sans-serif;
-        font-size: 21px;
-        line-height: 26px;
-        font-weight: 400;
         border-radius: 5px;
         text-align: center;
         color: #FFFFFF;

@@ -15,6 +15,7 @@ const HabitPage = () => {
     const [myHabits, setMyHabits] = useState(undefined);
     const [newHabitTab, setNewHabitTab] = useState(false);
 
+
     useEffect(() => {
         axios.get(`${APIURL}/habits`, {
             headers: { Authorization: `Bearer ${token}` }

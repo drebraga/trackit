@@ -20,7 +20,10 @@ function App() {
           <Route path="/" element={<LoginPage setResLogin={setResLogin} />} />
           <Route path="/cadastro" element={<SignInPage />} />
           <Route path="/habitos" element={<HabitPage />} />
-          <Route path="/hoje" element={<TodayPage />} />
+          <Route path="/hoje" element={
+            <TodayPage setResLogin={setResLogin} />
+          }
+          />
           <Route path="/historico" element={<HistoryPage />} />
           <Route path="*" element={"Erro, caminho errado"} />
         </Routes>

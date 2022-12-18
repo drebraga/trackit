@@ -23,11 +23,12 @@ export const Text = styled.p`
     line-height: 22px;
     color: #52B6FF;
 `;
-export const Today = styled.input`
+export const Today = styled.button`
     margin-bottom: 35px;
     width: 90px;
     height: 90px;
     border-radius: 50%;
+    border: none;
     background: #52B6FF;
     font-family: 'Lexend Deca', sans-serif;
     font-weight: 400;
