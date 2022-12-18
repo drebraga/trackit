@@ -40,7 +40,10 @@ export const InputsLogin = styled.form`
         padding: 10px;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
-        background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+        background: "#FFFFFF";
+        &:disabled{
+            background: #F2F2F2;
+        }
         &::placeholder{
             color: #DBDBDB;
         }
@@ -55,6 +58,9 @@ export const InputsLogin = styled.form`
         display: flex;
         justify-content: center;
         align-items: center;
+        &:disabled{
+            opacity: 0.7;
+        }
     }
 `;
 export const Cadastro = styled.p`

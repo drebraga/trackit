@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 import { APIURL } from "../../constants/url";
 import { ThreeDots } from "react-loader-spinner";
+import logo from "../../assets/logo.png"
 
 const SignInPage = () => {
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const SignInPage = () => {
 
     return (
         <Login>
+            <img src={logo} alt="Logo do site" />
             <Title>TrackIt</Title>
             <InputsLogin onSubmit={sendRequest}>
                 <input

@@ -22,7 +22,10 @@ export const InputText = styled.input`
     padding: 10px;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
-    background: ${props => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+    background: #FFFFFF;
+    &:disabled{
+        background: #F2F2F2;
+    }
     &::placeholder{
         font-family: 'Lexend Deca', sans-serif;
         font-size: 21px;
@@ -52,5 +55,11 @@ export const InputFinal = styled.button`
     justify-content: center;
     align-items: center;
     color: ${props => props.value === "Cancelar" ? "#52B6FF" : "#FFFFFF"};
-    background-color: ${props => props.value === "Cancelar" ? "#FFFFFF" : "#52B6FF"};
+    background-color: ${props => props.value === "Cancelar" ?
+        "#FFFFFF"
+        :
+        "#52B6FF"};
+    &:disabled{
+        opacity: 0.7;
+    }
 `;

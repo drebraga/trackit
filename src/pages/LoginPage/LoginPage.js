@@ -4,6 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../../constants/url";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
+import logo from "../../assets/logo.png"
 
 const LoginPage = ({ setResLogin }) => {
     const navigate = useNavigate();
@@ -34,6 +35,7 @@ const LoginPage = ({ setResLogin }) => {
 
     return (
         <Login>
+            <img src={logo} alt="Logo do site" />
             <Title>TrackIt</Title>
             <InputsLogin onSubmit={sendRequest}>
                 <input
@@ -43,6 +45,7 @@ const LoginPage = ({ setResLogin }) => {
                     value={loginData.email}
                     onChange={handleInput}
                     disabled={loginStatus}
+                    color={loginStatus}
                     required
                 />
                 <input
@@ -52,9 +55,10 @@ const LoginPage = ({ setResLogin }) => {
                     value={loginData.password}
                     onChange={handleInput}
                     disabled={loginStatus}
+                    color={loginStatus}
                     required
                 />
-                <button disabled={loginStatus} type="submit">
+                <button disabled={loginStatus} color={loginStatus} type="submit">
                     {(!loginStatus) ? "Entrar" :
                         <ThreeDots
                             height="45"
