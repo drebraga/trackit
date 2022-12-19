@@ -4,7 +4,7 @@ import Context from "../Context/Context";
 import { useContext } from "react";
 
 const Header = () => {
-    const user = useContext(Context);
+    const { resLogin } = useContext(Context);
     return (
         <Head>
             <Link to="/">
@@ -12,7 +12,7 @@ const Header = () => {
                     TrackIt
                 </Title>
             </Link>
-            <Image src={user.image} alt="Imagem perfil" />
+            <Image src={resLogin.image} alt="Imagem perfil" />
         </Head>
     );
 }

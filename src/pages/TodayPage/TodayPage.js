@@ -9,24 +9,24 @@ import { NOHABITSTODAY, WEEKDAY } from "../../constants/Textos";
 import { APIURL } from "../../constants/url";
 import { Text, Title, Today } from "./styled";
 
-const TodayPage = ({ setResLogin }) => {
-    const user = useContext(Context);
+const TodayPage = () => {
+    const { resLogin, setResLogin } = useContext(Context);
     const [myTodayHabits, setMyTodayHabits] = useState(undefined);
     const date = new Date();
     const dia = date.getDay();
     const [cont, setCont] = useState(0);
-    
 
+    
     useEffect(() => {
         axios.get(`${APIURL}/habits/today`, {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${resLogin.token}` }
         })
             .then((res) => {
                 setMyTodayHabits(res.data);
                 const newCont = res.data.filter(e => e.done === true).length;
                 setCont(newCont);
                 const percent = Math.round(newCont / res.data.length * 100);
-                setResLogin({...user, percent});
+                setResLogin({ ...resLogin, percent });
             })
             .catch((err) => console.log(err.response.data.message));
     }, []);
@@ -43,7 +43,7 @@ const TodayPage = ({ setResLogin }) => {
             {cont === 0 ?
                 <Text textColor={false}>{NOHABITSTODAY}</Text>
                 :
-                <Text textColor={true}>{user.percent}% dos hábitos concluídos</Text>
+                <Text textColor={true}>{resLogin.percent}% dos hábitos concluídos</Text>
             }
             {myTodayHabits.length === 0 ?
                 <></>

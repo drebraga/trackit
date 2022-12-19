@@ -1,18 +1,28 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../../constants/url";
 import { Login, Title, InputsLogin, Cadastro } from "./styled";
 import logo from "../../assets/logo.png"
+import Context from "../../components/Context/Context";
 
-const LoginPage = ({ setResLogin }) => {
+const LoginPage = () => {
+    const { resLogin, setResLogin } = useContext(Context);
     const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginData, setLoginData] = useState({
         password: "",
         email: ""
     });
+
+    console.log(resLogin)
+
+    useEffect(() => {
+        if(resLogin.token !== undefined) {
+            navigate("/hoje")
+        }
+    }, [resLogin])
 
     function handleInput(e) {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -25,6 +35,7 @@ const LoginPage = ({ setResLogin }) => {
             .then((res) => {
                 setLoginStatus(false);
                 setResLogin(res.data);
+                localStorage.setItem("user", JSON.stringify(res.data));
                 navigate("/hoje");
             })
             .catch((err) => {
@@ -45,7 +56,6 @@ const LoginPage = ({ setResLogin }) => {
                     value={loginData.email}
                     onChange={handleInput}
                     disabled={loginStatus}
-                    color={loginStatus}
                     required
                 />
                 <input
@@ -55,10 +65,9 @@ const LoginPage = ({ setResLogin }) => {
                     value={loginData.password}
                     onChange={handleInput}
                     disabled={loginStatus}
-                    color={loginStatus}
                     required
                 />
-                <button disabled={loginStatus} color={loginStatus} type="submit">
+                <button disabled={loginStatus} type="submit">
                     {(!loginStatus) ? "Entrar" :
                         <ThreeDots
                             height="45"

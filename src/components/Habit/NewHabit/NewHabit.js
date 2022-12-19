@@ -6,12 +6,8 @@ import WeekDays from "../WeekDays/WeekDays";
 import { DivButton, Form, InputFinal, InputText } from "./styled";
 import { ThreeDots } from "react-loader-spinner";
 
-const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
-    const { token } = useContext(Context);
-    const [request, setRequest] = useState({
-        name: "",
-        days: []
-    });
+const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }) => {
+    const { resLogin } = useContext(Context);
     const [sendStatus, setSendStatus] = useState(false);
 
     function handleInput(e) {
@@ -33,12 +29,16 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab }) => {
         if (request.days.length > 0) {
             setSendStatus(true);
             axios.post(`${APIURL}/habits`, request, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${resLogin.token}` }
             })
                 .then((res) => {
                     setMyHabits([...myHabits, res.data])
                     setSendStatus(false);
                     setNewHabitTab(false);
+                    setRequest({
+                        name: "",
+                        days: []
+                    });
                 })
                 .catch((err) => console.log(err.response.data.message));
         } else {

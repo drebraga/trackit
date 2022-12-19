@@ -11,14 +11,17 @@ import Context from "../../components/Context/Context";
 import PageLoad from "../../components/PageLoad/PageLoad";
 
 const HabitPage = () => {
-    const { token } = useContext(Context);
+    const { resLogin } = useContext(Context);
     const [myHabits, setMyHabits] = useState(undefined);
     const [newHabitTab, setNewHabitTab] = useState(false);
-
+    const [request, setRequest] = useState({
+        name: "",
+        days: []
+    });
 
     useEffect(() => {
         axios.get(`${APIURL}/habits`, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${resLogin.token}` }
         })
             .then((res) => setMyHabits(res.data))
             .catch((err) => alert(err.response.data.message));
@@ -32,12 +35,20 @@ const HabitPage = () => {
         <Habit>
             <Header />
             <Footer />
-            <Title>Meus hábitos <Button onClick={() => setNewHabitTab(!newHabitTab)} type="button" value="+" /></Title>
+            <Title>Meus hábitos
+                <Button
+                    onClick={() =>
+                        setNewHabitTab(!newHabitTab)}
+                    type="button"
+                    value="+" />
+            </Title>
             {(newHabitTab) ?
                 <NewHabit
                     myHabits={myHabits}
                     setMyHabits={setMyHabits}
                     setNewHabitTab={setNewHabitTab}
+                    request={request}
+                    setRequest={setRequest}
                 />
                 :
                 <></>

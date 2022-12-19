@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Context from "../Context/Context";
 
 const Footer = () => {
-    const { percent } = useContext(Context);
+    const { resLogin } = useContext(Context);
 
     return (
         <Foot>
@@ -16,7 +16,7 @@ const Footer = () => {
             <Link to="/hoje">
                 <Today>
                     <CircularProgressbar
-                        value={percent}
+                        value={resLogin.percent}
                         text={"Hoje"}
                         styles={buildStyles({
                             pathTransitionDuration: 0.5,
