@@ -14,19 +14,6 @@ import Context from "./Context/Context";
 function Main() {
   const [resLogin, setResLogin] = useState(JSON.parse(localStorage.getItem("user")));
 
-  useEffect(() => {
-    axios.get(`${APIURL}/habits/today`, {
-      headers: { Authorization: `Bearer ${resLogin.token}` }
-    })
-      .then((res) => {
-        const habits = res.data;
-        const max = res.data.length;
-        const doneHabits = res.data.filter(e => e.done === true);
-        setResLogin({ ...resLogin, max, habits, doneHabits });
-      })
-      .catch((err) => console.log(err.response.data.message));
-  }, []);
-
   return (
     <>
       <GlobalStyle />

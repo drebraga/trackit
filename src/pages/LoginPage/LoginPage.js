@@ -17,10 +17,20 @@ const LoginPage = () => {
     });
 
     useEffect(() => {
-        if(resLogin.token !== undefined) {
+        if (resLogin !== null) {
+            axios.get(`${APIURL}/habits/today`, {
+                headers: { Authorization: `Bearer ${resLogin.token}` }
+            })
+                .then((res) => {
+                    const habits = res.data;
+                    const max = res.data.length;
+                    const doneHabits = res.data.filter(e => e.done === true);
+                    setResLogin({ ...resLogin, max, habits, doneHabits });
+                })
+                .catch((err) => console.log(err.response.data.message));
             navigate("/hoje")
         }
-    }, [resLogin])
+    }, [])
 
     function handleInput(e) {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });

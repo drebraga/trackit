@@ -19,8 +19,7 @@ const Habits = ({ habit, myHabits, setMyHabits }) => {
                     const doneHabits = resLogin.doneHabits.filter(e => e.id !== id);
                     const habits = resLogin.habits.filter(e => e.id !== id);
                     setMyHabits(newHabits);
-                    setResLogin({...resLogin, habits, doneHabits })
-                    console.log(doneHabits, habits)
+                    setResLogin({ ...resLogin, habits, doneHabits });
                 })
                 .catch((err) => console.log(err.response.data.message));
         }

@@ -10,7 +10,7 @@ import { APIURL } from "../../constants/url";
 import { Text, Title, Today } from "./styled";
 
 const TodayPage = () => {
-    const { resLogin } = useContext(Context);
+    const { resLogin, setResLogin } = useContext(Context);
     const [myTodayHabits, setMyTodayHabits] = useState(undefined);
     const date = new Date();
     const dia = date.getDay();
@@ -21,6 +21,10 @@ const TodayPage = () => {
             headers: { Authorization: `Bearer ${resLogin.token}` }
         })
             .then((res) => {
+                const habits = res.data;
+                const max = res.data.length;
+                const doneHabits = res.data.filter(e => e.done === true);
+                setResLogin({ ...resLogin, max, habits, doneHabits });
                 setMyTodayHabits(res.data);
             })
             .catch((err) => console.log(err.response.data.message));

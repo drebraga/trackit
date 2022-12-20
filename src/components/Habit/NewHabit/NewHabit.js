@@ -32,7 +32,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                 headers: { Authorization: `Bearer ${resLogin.token}` }
             })
                 .then((res) => {
-                    setResLogin({...resLogin, habits: [...resLogin.habits, res.data]});
+                    setResLogin({ ...resLogin, habits: [...resLogin.habits, res.data] });
                     setMyHabits([...myHabits, res.data]);
                     setSendStatus(false);
                     setNewHabitTab(false);

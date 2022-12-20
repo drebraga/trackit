@@ -28,9 +28,15 @@ const HabitCard = ({ habit }) => {
                 setStatusRequest(newStatus);
                 setChecked(!checked);
                 (!status) ?
-                    setResLogin({...resLogin, doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]]})
+                    setResLogin({
+                        ...resLogin,
+                        doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]]
+                    })
                     :
-                    setResLogin({...resLogin, doneHabits: resLogin.doneHabits.filter(e => e.id !== i)});
+                    setResLogin({
+                        ...resLogin,
+                        doneHabits: resLogin.doneHabits.filter(e => e.id !== i)
+                    });
                 (!status) ?
                     setLocalCurrentSequence(localCurrentSequence + diference)
                     :
