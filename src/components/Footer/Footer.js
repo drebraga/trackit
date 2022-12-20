@@ -5,8 +5,11 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useContext } from "react";
 import Context from "../Context/Context";
 
+
 const Footer = () => {
     const { resLogin } = useContext(Context);
+    const percent = Math.round(resLogin.doneHabits.length / resLogin.habits.length * 100);
+    console.log(resLogin.doneHabits)
 
     return (
         <Foot>
@@ -16,7 +19,7 @@ const Footer = () => {
             <Link to="/hoje">
                 <Today>
                     <CircularProgressbar
-                        value={resLogin.percent}
+                        value={percent}
                         text={"Hoje"}
                         styles={buildStyles({
                             pathTransitionDuration: 0.5,

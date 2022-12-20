@@ -7,7 +7,7 @@ import { DivButton, Form, InputFinal, InputText } from "./styled";
 import { ThreeDots } from "react-loader-spinner";
 
 const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }) => {
-    const { resLogin } = useContext(Context);
+    const { resLogin, setResLogin } = useContext(Context);
     const [sendStatus, setSendStatus] = useState(false);
 
     function handleInput(e) {
@@ -32,7 +32,8 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                 headers: { Authorization: `Bearer ${resLogin.token}` }
             })
                 .then((res) => {
-                    setMyHabits([...myHabits, res.data])
+                    setResLogin({...resLogin, habits: [...resLogin.habits, res.data]});
+                    setMyHabits([...myHabits, res.data]);
                     setSendStatus(false);
                     setNewHabitTab(false);
                     setRequest({

@@ -16,8 +16,6 @@ const LoginPage = () => {
         email: ""
     });
 
-    console.log(resLogin)
-
     useEffect(() => {
         if(resLogin.token !== undefined) {
             navigate("/hoje")

@@ -5,8 +5,8 @@ import { APIURL } from "../../constants/url";
 import { useContext, useState } from "react";
 import Context from "../Context/Context";
 
-const HabitCard = ({ habit, cont, setCont, myTodayHabits, setResLogin }) => {
-    const user = useContext(Context);
+const HabitCard = ({ habit }) => {
+    const { resLogin, setResLogin } = useContext(Context);
     const { name, id, highestSequence, currentSequence, done } = habit;
     const statusAPI = (done) ? "uncheck" : "check";
     const [statusRequest, setStatusRequest] = useState(statusAPI);
@@ -16,34 +16,29 @@ const HabitCard = ({ habit, cont, setCont, myTodayHabits, setResLogin }) => {
     const isHigher = checked ?
         ((localCurrentSequence >= localHighestSequence) ? true : false)
         : false;
+    const position0 = 0;
+    const diference = 1;
 
     function checkHabit(i, status) {
         axios.post(`${APIURL}/habits/${i}/${statusRequest}`, {}, {
-            headers: { Authorization: `Bearer ${user.token}` }
+            headers: { Authorization: `Bearer ${resLogin.token}` }
         })
             .then(() => {
                 const newStatus = (!status) ? "uncheck" : "check";
                 setStatusRequest(newStatus);
                 setChecked(!checked);
-                if (!status) {
-                    const newCont = cont + 1
-                    setCont(newCont)
-                    const percent = Math.round(newCont / myTodayHabits.length * 100);
-                    setResLogin({...user, percent});
-                } else {
-                    const newCont = cont - 1
-                    setCont(newCont)
-                    const percent = Math.round(newCont / myTodayHabits.length * 100);
-                    setResLogin({...user, percent});
-                }
                 (!status) ?
-                    setLocalCurrentSequence(localCurrentSequence + 1)
+                    setResLogin({...resLogin, doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]]})
                     :
-                    setLocalCurrentSequence(localCurrentSequence - 1);
+                    setResLogin({...resLogin, doneHabits: resLogin.doneHabits.filter(e => e.id !== i)});
                 (!status) ?
-                    setLocalHighestSequence(localHighestSequence + 1)
+                    setLocalCurrentSequence(localCurrentSequence + diference)
                     :
-                    setLocalHighestSequence(localHighestSequence - 1)
+                    setLocalCurrentSequence(localCurrentSequence - diference);
+                (!status) ?
+                    setLocalHighestSequence(localHighestSequence + diference)
+                    :
+                    setLocalHighestSequence(localHighestSequence - diference);
             })
             .catch((err) => alert(err.response.data.message))
     }
