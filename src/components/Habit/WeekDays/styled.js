@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputDays = styled.input`
+export const InputDays = styled.button`
     box-sizing: border-box;
     margin-right: 10px;
     width: 30px;

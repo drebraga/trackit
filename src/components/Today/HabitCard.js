@@ -18,6 +18,8 @@ const HabitCard = ({ habit }) => {
         : false;
     const position0 = 0;
     const diference = 1;
+    const hundred = 100;
+
 
     function checkHabit(i, status) {
         axios.post(`${APIURL}/habits/${i}/${statusRequest}`, {}, {
@@ -33,14 +35,14 @@ const HabitCard = ({ habit }) => {
                         doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]],
                         percent: Math.round(
                             [...resLogin.doneHabits,
-                            resLogin.habits.filter(e => e.id === i)[position0]].length / resLogin.habits.length * 100)
+                            resLogin.habits.filter(e => e.id === i)[position0]].length / resLogin.habits.length * hundred)
                     })
                     :
                     setResLogin({
                         ...resLogin,
                         doneHabits: resLogin.doneHabits.filter(e => e.id !== i),
                         percent: Math.round(
-                            resLogin.doneHabits.filter(e => e.id !== i).length / resLogin.habits.length * 100),
+                            resLogin.doneHabits.filter(e => e.id !== i).length / resLogin.habits.length * hundred),
                     });
                 (!status) ?
                     setLocalCurrentSequence(localCurrentSequence + diference)

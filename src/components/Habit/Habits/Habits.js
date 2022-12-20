@@ -8,6 +8,7 @@ import Context from "../../Context/Context";
 
 const Habits = ({ habit, myHabits, setMyHabits }) => {
     const { resLogin, setResLogin } = useContext(Context);
+    const hundred = 100;
 
     function sendRequestRemove(id) {
         if (window.confirm("Deseja realmente apagar esse hábito?")) {
@@ -18,7 +19,7 @@ const Habits = ({ habit, myHabits, setMyHabits }) => {
                     const newHabits = myHabits.filter(e => e.id !== id);
                     const doneHabits = resLogin.doneHabits.filter(e => e.id !== id);
                     const habits = resLogin.habits.filter(e => e.id !== id);
-                    const percent = Math.round(doneHabits.length / habits.length * 100);
+                    const percent = Math.round(doneHabits.length / habits.length * hundred);
                     setMyHabits(newHabits);
                     setResLogin({ ...resLogin, habits, doneHabits, percent });
                 })

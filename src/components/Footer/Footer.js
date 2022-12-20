@@ -7,7 +7,7 @@ import Context from "../Context/Context";
 
 
 const Footer = () => {
-    const { resLogin, setResLogin } = useContext(Context);
+    const { resLogin } = useContext(Context);
 
     return (
         <Foot data-test="menu">

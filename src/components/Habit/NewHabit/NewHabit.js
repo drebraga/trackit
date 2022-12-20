@@ -11,6 +11,8 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
     const [sendStatus, setSendStatus] = useState(false);
     const date = new Date();
     const dia = date.getDay();
+    const hundred = 100;
+
 
     function handleInput(e) {
         if (e.target.name === "name") {
@@ -18,11 +20,12 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                 ...request, [e.target.name]: e.target.value
             });
         } else {
-            const newdays = request.days.includes(e.target.name) ?
-                request.days.filter(d => d !== e.target.name)
+            const newdays = request.days.includes(Number(e.target.name)) ?
+                request.days.filter(d => d !== Number(e.target.name))
                 :
                 [...request.days, Number(e.target.name)];
             setRequest({ ...request, days: newdays });
+            console.log(request.days)
         }
     }
 
@@ -38,7 +41,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                         setResLogin({
                             ...resLogin,
                             habits: [...resLogin.habits, res.data],
-                            percent: Math.round(resLogin.doneHabits.length / [...resLogin.habits, res.data].length * 100)
+                            percent: Math.round(resLogin.doneHabits.length / [...resLogin.habits, res.data].length * hundred)
                         });
                     setMyHabits([...myHabits, res.data]);
                     setSendStatus(false);

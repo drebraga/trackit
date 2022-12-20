@@ -14,7 +14,7 @@ const WeekDays = ({ dis, handleInput, days }) => {
                     value={e}
                     disabled={dis}
                     includes={days.includes(i)}
-                />
+                >{e}</InputDays>
             )}
         </div>
     );

@@ -14,6 +14,8 @@ const TodayPage = () => {
     const [myTodayHabits, setMyTodayHabits] = useState(undefined);
     const date = new Date();
     const dia = date.getDay();
+    const hundred = 100;
+
 
 
     useEffect(() => {
@@ -23,7 +25,7 @@ const TodayPage = () => {
             .then((res) => {
                 const habits = res.data;
                 const doneHabits = res.data.filter(e => e.done === true);
-                const percent = Math.round(doneHabits.length / habits.length * 100);
+                const percent = Math.round(doneHabits.length / habits.length * hundred);
                 setResLogin({ ...resLogin, habits, doneHabits, percent });
                 setMyTodayHabits(res.data);
             })
