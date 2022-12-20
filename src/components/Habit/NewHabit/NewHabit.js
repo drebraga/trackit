@@ -48,8 +48,9 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
     }
 
     return (
-        <Form onSubmit={sendRequestAdd}>
+        <Form data-test="habit-create-container" onSubmit={sendRequestAdd}>
             <InputText
+                data-test="habit-name-input"
                 type="text"
                 placeholder="nome do hábito"
                 name="name"
@@ -65,6 +66,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
             />
             <DivButton>
                 <InputFinal
+                    data-test="habit-create-cancel-btn"
                     onClick={() => setNewHabitTab(false)}
                     disabled={sendStatus}
                     value="Cancelar"
@@ -72,6 +74,7 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                     Cancelar
                 </ InputFinal>
                 <InputFinal
+                    data-test="habit-create-save-btn"
                     type="submit"
                     value="Salvar"
                     disabled={sendStatus}

@@ -11,11 +11,11 @@ const Footer = () => {
     const percent = Math.round(resLogin.doneHabits.length / resLogin.habits.length * 100);
 
     return (
-        <Foot>
-            <Link to="/habitos">
+        <Foot data-test="menu">
+            <Link data-test="habit-link" to="/habitos">
                 <Text>Habitos</Text>
             </Link>
-            <Link to="/hoje">
+            <Link data-test="today-link" to="/hoje">
                 <Today>
                     <CircularProgressbar
                         value={percent}
@@ -29,7 +29,7 @@ const Footer = () => {
                     />
                 </Today>
             </Link>
-            <Link to="/historico">
+            <Link data-test="history-link" to="/historico">
                 <Text>Histórico</Text>
             </Link>
         </Foot>

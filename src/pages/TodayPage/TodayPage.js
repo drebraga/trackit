@@ -38,11 +38,19 @@ const TodayPage = () => {
         <Today>
             <Header />
             <Footer />
-            <Title>{WEEKDAY[dia]}, {date.toLocaleDateString()}</Title>
+            <Title data-test="today">{WEEKDAY[dia]}, {date.toLocaleDateString()}</Title>
             {resLogin.percent === 0 ?
-                <Text textColor={false}>{NOHABITSTODAY}</Text>
+                <Text
+                    data-test="today-counter"
+                    textColor={false}>
+                    {NOHABITSTODAY}
+                </Text>
                 :
-                <Text textColor={true}>{resLogin.percent}% dos hábitos concluídos</Text>
+                <Text
+                    data-test="today-counter"
+                    textColor={true}>
+                    {resLogin.percent}% dos hábitos concluídos
+                </Text>
             }
             {myTodayHabits.length === 0 ?
                 <></>

@@ -50,16 +50,22 @@ const HabitCard = ({ habit }) => {
     }
 
     return (
-        <Card>
+        <Card data-test="today-habit-container">
             <div>
-                <HabitTitle>{name}</HabitTitle>
+                <HabitTitle data-test="today-habit-name">{name}</HabitTitle>
                 <HabitText>
-                    Sequência atual: <CheckText check={checked}>{localCurrentSequence} dias</CheckText><br />
-                    Seu recorde: <CheckText check={isHigher}> {localHighestSequence} dias</CheckText>
+                    <p
+                        data-test="today-habit-sequence">
+                        Sequência atual:
+                        <CheckText check={checked}> {localCurrentSequence} dias</CheckText></p>
+                    <p
+                        data-test="today-habit-record">
+                        Seu recorde:
+                        <CheckText check={isHigher}> {localHighestSequence} dias</CheckText></p>
                 </HabitText>
             </div>
             <CheckBox check={checked}>
-                <BsFillCheckSquareFill onClick={() => checkHabit(id, checked)} />
+                <BsFillCheckSquareFill data-test="today-habit-check-btn" onClick={() => checkHabit(id, checked)} />
             </CheckBox>
         </Card>
     );

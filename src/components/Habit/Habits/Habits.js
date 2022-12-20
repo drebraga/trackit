@@ -26,10 +26,10 @@ const Habits = ({ habit, myHabits, setMyHabits }) => {
     }
 
     return (
-        <Card>
-            <DivSpaceBet>
+        <Card data-test="habit-container">
+            <DivSpaceBet data-test="habit-name">
                 {habit.name}
-                <BiTrash onClick={() => sendRequestRemove(habit.id)} />
+                <BiTrash data-test="habit-delete-btn" onClick={() => sendRequestRemove(habit.id)} />
             </DivSpaceBet>
             <WeekDays dis={true} days={habit.days} />
         </Card>

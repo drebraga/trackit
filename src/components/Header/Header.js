@@ -6,7 +6,7 @@ import { useContext } from "react";
 const Header = () => {
     const { resLogin } = useContext(Context);
     return (
-        <Head>
+        <Head data-test="header">
             <Link to="/">
                 <Title>
                     TrackIt

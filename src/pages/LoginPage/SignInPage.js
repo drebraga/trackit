@@ -42,6 +42,7 @@ const SignInPage = () => {
             <Title>TrackIt</Title>
             <InputsLogin onSubmit={sendRequest}>
                 <input
+                    data-test="email-input"
                     placeholder="email"
                     type="email"
                     name="email"
@@ -51,6 +52,7 @@ const SignInPage = () => {
                     required
                 />
                 <input
+                    data-test="password-input"
                     placeholder="senha"
                     type="password"
                     name="password"
@@ -60,6 +62,7 @@ const SignInPage = () => {
                     required
                 />
                 <input
+                    data-test="user-name-input"
                     placeholder="nome"
                     type="text"
                     name="name"
@@ -69,6 +72,7 @@ const SignInPage = () => {
                     required
                 />
                 <input
+                    data-test="user-image-input"
                     placeholder="foto"
                     type="url"
                     name="image"
@@ -77,7 +81,7 @@ const SignInPage = () => {
                     disabled={loginStatus}
                     required
                 />
-                <button disabled={loginStatus} type="submit">
+                <button data-test="signup-btn" disabled={loginStatus} type="submit">
                     {(!loginStatus) ? "Cadastrar" :
                         <ThreeDots
                             height="45"
@@ -91,7 +95,7 @@ const SignInPage = () => {
                         />}
                 </button>
             </InputsLogin>
-            <Link to="/">
+            <Link data-test="login-link" to="/">
                 <Cadastro>Já tem uma conta? Faça login!</Cadastro>
             </Link>
         </Login>

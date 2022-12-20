@@ -35,8 +35,10 @@ const HabitPage = () => {
         <Habit>
             <Header />
             <Footer />
-            <Title>Meus hábitos
+            <Title>
+                Meus hábitos
                 <Button
+                    data-test="habit-create-btn"
                     onClick={() =>
                         setNewHabitTab(!newHabitTab)}
                     type="button"

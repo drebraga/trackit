@@ -58,6 +58,7 @@ const LoginPage = () => {
             <Title>TrackIt</Title>
             <InputsLogin onSubmit={sendRequest}>
                 <input
+                    data-test="email-input"
                     placeholder="email"
                     type="email"
                     name="email"
@@ -67,6 +68,7 @@ const LoginPage = () => {
                     required
                 />
                 <input
+                    data-test="password-input"
                     placeholder="senha"
                     type="password"
                     name="password"
@@ -75,7 +77,7 @@ const LoginPage = () => {
                     disabled={loginStatus}
                     required
                 />
-                <button disabled={loginStatus} type="submit">
+                <button data-test="login-btn" disabled={loginStatus} type="submit">
                     {(!loginStatus) ? "Entrar" :
                         <ThreeDots
                             height="45"
@@ -89,7 +91,7 @@ const LoginPage = () => {
                         />}
                 </button>
             </InputsLogin>
-            <Link to="/cadastro">
+            <Link data-test="signup-link" to="/cadastro">
                 <Cadastro>Não tem uma conta? Cadastre-se!</Cadastro>
             </Link>
         </Login>

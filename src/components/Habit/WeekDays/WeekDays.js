@@ -6,6 +6,7 @@ const WeekDays = ({ dis, handleInput, days }) => {
         <div>
             {WEEKDAYSLETTERS.map((e, i) =>
                 <InputDays
+                    data-test="habit-day"
                     onClick={handleInput}
                     name={i}
                     key={i}
