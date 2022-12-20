@@ -7,8 +7,10 @@ import Context from "../Context/Context";
 
 
 const Footer = () => {
-    const { resLogin } = useContext(Context);
+    const { resLogin, setResLogin } = useContext(Context);
     const percent = Math.round(resLogin.doneHabits.length / resLogin.habits.length * 100);
+    setResLogin({...resLogin, percent});
+
 
     return (
         <Foot data-test="menu">
