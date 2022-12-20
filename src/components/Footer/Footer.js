@@ -8,9 +8,6 @@ import Context from "../Context/Context";
 
 const Footer = () => {
     const { resLogin, setResLogin } = useContext(Context);
-    const percent = Math.round(resLogin.doneHabits.length / resLogin.habits.length * 100);
-    setResLogin({...resLogin, percent});
-
 
     return (
         <Foot data-test="menu">
@@ -20,7 +17,7 @@ const Footer = () => {
             <Link data-test="today-link" to="/hoje">
                 <Today>
                     <CircularProgressbar
-                        value={percent}
+                        value={resLogin.percent}
                         text={"Hoje"}
                         styles={buildStyles({
                             pathTransitionDuration: 0.5,

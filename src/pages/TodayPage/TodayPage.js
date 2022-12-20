@@ -22,9 +22,9 @@ const TodayPage = () => {
         })
             .then((res) => {
                 const habits = res.data;
-                const max = res.data.length;
                 const doneHabits = res.data.filter(e => e.done === true);
-                setResLogin({ ...resLogin, max, habits, doneHabits });
+                const percent = Math.round(doneHabits.length / habits.length * 100);
+                setResLogin({ ...resLogin, habits, doneHabits, percent });
                 setMyTodayHabits(res.data);
             })
             .catch((err) => console.log(err.response.data.message));
@@ -46,11 +46,18 @@ const TodayPage = () => {
                     {NOHABITSTODAY}
                 </Text>
                 :
-                <Text
-                    data-test="today-counter"
-                    textColor={true}>
-                    {resLogin.percent}% dos hábitos concluídos
-                </Text>
+                isNaN(resLogin.percent) ?
+                    <Text
+                        data-test="today-counter"
+                        textColor={false}>
+                        {NOHABITSTODAY}
+                    </Text>
+                    :
+                    <Text
+                        data-test="today-counter"
+                        textColor={true}>
+                        {resLogin.percent}% dos hábitos concluídos
+                    </Text>
             }
             {myTodayHabits.length === 0 ?
                 <></>
