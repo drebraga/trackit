@@ -30,12 +30,17 @@ const HabitCard = ({ habit }) => {
                 (!status) ?
                     setResLogin({
                         ...resLogin,
-                        doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]]
+                        doneHabits: [...resLogin.doneHabits, resLogin.habits.filter(e => e.id === i)[position0]],
+                        percent: Math.round(
+                            [...resLogin.doneHabits,
+                            resLogin.habits.filter(e => e.id === i)[position0]].length / resLogin.habits.length * 100)
                     })
                     :
                     setResLogin({
                         ...resLogin,
-                        doneHabits: resLogin.doneHabits.filter(e => e.id !== i)
+                        doneHabits: resLogin.doneHabits.filter(e => e.id !== i),
+                        percent: Math.round(
+                            resLogin.doneHabits.filter(e => e.id !== i).length / resLogin.habits.length * 100),
                     });
                 (!status) ?
                     setLocalCurrentSequence(localCurrentSequence + diference)

@@ -9,6 +9,8 @@ import { ThreeDots } from "react-loader-spinner";
 const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }) => {
     const { resLogin, setResLogin } = useContext(Context);
     const [sendStatus, setSendStatus] = useState(false);
+    const date = new Date();
+    const dia = date.getDay();
 
     function handleInput(e) {
         if (e.target.name === "name") {
@@ -32,7 +34,12 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                 headers: { Authorization: `Bearer ${resLogin.token}` }
             })
                 .then((res) => {
-                    setResLogin({ ...resLogin, habits: [...resLogin.habits, res.data] });
+                    (res.data.days.includes(dia)) &&
+                        setResLogin({
+                            ...resLogin,
+                            habits: [...resLogin.habits, res.data],
+                            percent: Math.round(resLogin.doneHabits.length / [...resLogin.habits, res.data].length * 100)
+                        });
                     setMyHabits([...myHabits, res.data]);
                     setSendStatus(false);
                     setNewHabitTab(false);
@@ -41,7 +48,10 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                         days: []
                     });
                 })
-                .catch((err) => console.log(err.response.data.message));
+                .catch((err) => {
+                    setSendStatus(false);
+                    alert(err.response.data.message);
+                });
         } else {
             alert("Adicione pelo menos um dia ao hábito");
         }
@@ -57,7 +67,6 @@ const NewHabit = ({ myHabits, setMyHabits, setNewHabitTab, request, setRequest }
                 value={request.name}
                 onChange={handleInput}
                 disabled={sendStatus}
-                required
             />
             <WeekDays
                 dis={sendStatus}
